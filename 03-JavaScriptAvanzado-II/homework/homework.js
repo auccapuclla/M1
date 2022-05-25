@@ -59,6 +59,17 @@ function cacheFunction(cb) {
                       simplemente buscará en la caché cuál es el resultado de square(5) 
                       y lo retornará (tip: si usaste un objeto, podés usar hasOwnProperty) 
   */
+  let cache = {};
+  return function (value) {
+    if (cache.hasOwnProperty(value.toString())) {
+      return cache[value.toString()];
+    }
+    let valueToBeStored = cb(value);
+    cache[value.toString()] = valueToBeStored;
+    // console.log(cb(value));
+    // console.log(cache);
+    return valueToBeStored;
+  };
 }
 
 // Bind
